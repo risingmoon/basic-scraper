@@ -7,6 +7,9 @@ FILENAME = 'apartments.html'
 def fetch_search_results(
     query=None, minAsk=None, maxAsk=None, bedrooms=None
 ):
+    """Fetches a request on Craigslist based on search parameter,
+    and write the response as a FILENAME (html). and returns content
+    and encoding values"""
     search_params = {
         key: val for key, val in locals().items() if val is not None
     }
@@ -23,18 +26,21 @@ def fetch_search_results(
 
 
 def read_search_results(filename=FILENAME):
-    encoding = 'utf-8'
+    """Reads written html html and returns html and encoding strings"""
     with open(filename, 'r') as outfile:
         html = outfile.read()
-    return html, encoding
+    return html, 'utf-8'
 
 
 def parse_source(html, encoding='utf-8'):
+    """Parses html file and returns as a BeautifulSoup object"""
     parsed = BeautifulSoup(html, from_encoding=encoding)
     return parsed
 
 
 def extract_listings(parsed):
+    """Extracts location, link, description, price, and size
+    from BeautifulSoup object and returns as a dictionary."""
     location_attrs = {'data-latitude': True, 'data-longitude': True}
     listings = parsed.find_all('p', class_='row', attrs=location_attrs)
     extracted = []
@@ -63,6 +69,4 @@ if __name__ == '__main__':
     doc = parse_source(html, encoding)
     print type(doc)
     listings = extract_listings(doc)
-    #pprint.pprint(listings)
-    #print listings[0].prettify()
-    #print doc.prettify(encoding=encoding)
+    pprint.pprint(listings)
