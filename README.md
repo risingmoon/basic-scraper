@@ -17,7 +17,7 @@ If typed:
 The program instead reads from existing "apartmental.html" if it exists, and parses the results under the assumption of 'utf-8' encoding. See NOTE[1]
 
 
-NOTE[1]: It's assumed that html pages are utf-8 encoded. Approximately over half of world wide web uses utf-8 standad.
+NOTE[1]: It's assumed that html pages are utf-8 encoded. Approximately over half of world wide web uses utf-8 standard.
 
 See source: http://en.wikipedia.org/wiki/UTF-8
 
