@@ -1,9 +1,7 @@
 argparse==1.2.1
 beautifulsoup4==4.3.2
-distribute==0.6.24
-html5lib==1.0b3
-python-termstyle==0.1.10
+distribute==0.7.3
+html5lib==0.999
 requests==2.2.1
 six==1.5.2
-sure==1.2.5
 wsgiref==0.1.2
