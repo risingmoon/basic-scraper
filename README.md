@@ -2,6 +2,8 @@ Basic Scraper
 =============
 [![Build Status](https://travis-ci.org/risingmoon/basic-scraper.png?branch=master)](https://travis-ci.org/risingmoon/basic-scraper)
 
+Extenions: Now "scraper.py" includes geocoded data from Google as well.
+
 In this project, "scraper.py" uses Python to scrape apartmental listings from Seattle [Craigslist] (http://seattle.craigslist.org/search/apa).
 
 If no arguments are given:
