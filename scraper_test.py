@@ -30,11 +30,11 @@ class ScraperTest(unittest.TestCase):
         #Test returned instance type is bs4.BeatifulSoup
         self.assertIsInstance(parse_source(html), bs4.BeautifulSoup)
 
-    def test_extract_listings(self):
-        html, encoding = read_search_results()
-        doc = parse_source(html)
-        #Test returned instance type is a list
-        self.assertIsInstance(extract_listings(doc), list)
+    # Generator Type: test no longer applicable
+    # def test_extract_listings(self):
+    #     html, encoding = read_search_results()
+    #     doc = parse_source(html)
+    #     self.assertIsInstance(extract_listings(doc), list)
 
 if __name__ == "__main__":
     unittest.main()
