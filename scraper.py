@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import sys
+import json
 FILENAME = 'apartments.html'
 
 
@@ -55,8 +56,26 @@ def extract_listings(parsed):
             'price': price_span.string.strip(),
             'size': price_span.next_sibling.strip(' \n-/')
         }
-        extracted.append(this_listing)
-    return extracted
+        yield this_listing
+
+
+def add_address(listing):
+    api_url = 'http://maps.googleapis.com/maps/api/geocode/json'
+    loc = listing['location']
+    latlng_tmpl = "{data-latitude},{data-longitude}"
+    parameters = {
+        'sensor': 'false',
+        'latlng': latlng_tmpl.format(**loc),
+    }
+    resp = requests.get(api_url, params=parameters)
+    resp.raise_for_status()
+    data = json.loads(resp.text)
+    if data['status'] == 'OK':
+        best = data['results'][0]
+        listing['address'] = best['formatted_address']
+    else:
+        listing['address'] = 'unavailable'
+    return listing
 
 if __name__ == '__main__':
     import pprint
@@ -68,5 +87,6 @@ if __name__ == '__main__':
         )
     doc = parse_source(html, encoding)
     print type(doc)
-    listings = extract_listings(doc)
-    pprint.pprint(listings)
+    for listing in extract_listings(doc):
+        listing = add_address(listing)
+        pprint.pprint(listing)
